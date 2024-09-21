@@ -1,16 +1,74 @@
 [
   {
-    "name": "goku",
-    "email": "goku@saiyan.com",
-    "messages": [
-      "a"
+    "hero": "Gon",
+    "origin": "Kryptonnnn",
+    "superPower": [
+      "2345"
     ]
   },
   {
-    "name": "LeviDuarte",
-    "email": "levigduarte5@gmail.com",
-    "messages": [
-      "Hello my SIGMA"
+    "hero": "SuperMan ",
+    "origin": "we",
+    "superPower": [
+      "Origin"
+    ]
+  },
+  {
+    "hero": "SuperMan",
+    "origin": "Krypton",
+    "superPower": [
+      "21",
+      "21",
+      "1"
+    ]
+  },
+  {
+    "hero": "Gon",
+    "origin": "Krypton",
+    "superPower": [
+      "21"
+    ]
+  },
+  {
+    "hero": "DareDevil",
+    "origin": "Hells Kitchen",
+    "superPower": [
+      "Welcome to the "
+    ]
+  },
+  {
+    "hero": "Gon",
+    "origin": "Hells Kitchen",
+    "superPower": [
+      "Welcoe to the shadow realm"
+    ]
+  },
+  {
+    "hero": "SuperMan",
+    "origin": "Oa",
+    "superPower": [
+      "Welcoem tot eh realm`"
+    ]
+  },
+  {
+    "hero": "Goku",
+    "origin": "Vegeta",
+    "superPower": [
+      "Super Saiyan"
+    ]
+  },
+  {
+    "hero": "SuperMan ",
+    "origin": "Oa",
+    "superPower": [
+      "Green Lantern Powers in one"
+    ]
+  },
+  {
+    "hero": "SuperMan",
+    "origin": "Hunter",
+    "superPower": [
+      "ew"
     ]
   }
 ]

@@ -26,12 +26,11 @@ app.get('/', (req, res) => {
 app.get('/users', async (req, res) => {
     try {
         const data = await fs.readFile(dataPath, 'utf8');
-
-        const users = JSON.parse(data);
-        if (!users) {
+        const hero = JSON.parse(data);
+        if (!hero) {
             throw new Error("Error no users available");
         }
-        res.status(200).json(users);
+        res.status(200).json(hero);
     } catch (error) {
         console.error("Problem getting users" + error.message);
         res.status(500).json({ error: "Problem reading users" });
@@ -46,57 +45,70 @@ app.get('/form', (req, res) => {
 // Form submission route
 app.post('/submit-form', async (req, res) => {
     try {
-        const { name, email, message } = req.body;
+        const { hero, origin, superPowers } = req.body;
+
 
         // Read existing users from file
-        let users = [];
+        let heroes = [];
         try {
             const data = await fs.readFile(dataPath, 'utf8');
-            users = JSON.parse(data);
+            heroes = JSON.parse(data);
         } catch (error) {
             // If file doesn't exist or is empty, start with an empty array
             console.error('Error reading user data:', error);
-            users = [];
+            heroes = [];
+            console.log('error')
         }
 
         // Find or create user
-        let user = users.find(u => u.name === name && u.email === email);
-        if (user) {
-            user.messages.push(message);
+        let foundHero = heroes.find(h => h.hero === hero && h.origin === origin);
+        if (foundHero) {
+            foundHero.superPower.push(superPowers);
         } else {
-            user = { name, email, messages: [message] };
-            users.push(user);
+            foundHero = { hero, origin, superPower: [superPowers] };
+            heroes.push(foundHero);
         }
+        // let foundHero = users.find(user => user.hero === hero && user.origin === origin);
+
+        // if (foundHero) {
+        //     if (!Array.isArray(foundHero.superPower)) {
+        //         foundHero.superPower = [];
+        //     }
+        //     foundHero.superPower.push(superPowers);
+        // } else {
+        //     users.push({ hero, origin, superPower: [superPowers] });
+        // }
 
         // Save updated users
-        await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
+        await fs.writeFile(dataPath, JSON.stringify(heroes, null, 2));
+        console.log(heroes)
         res.redirect('/form');
     } catch (error) {
         console.error('Error processing form:', error);
         res.status(500).send('An error occurred while processing your submission.');
+    
     }
 });
 
 // Update user route (currently just logs and sends a response)
-app.put('/update-user/:currentName/:currentEmail', async (req, res) => {
+app.put('/update-user/:currentHero/:currentOrigin/:currentPowers', async (req, res) => {
     try {
-        const { currentName, currentEmail } = req.params;
-        const { newName, newEmail } = req.body;
-        console.log('Current user:', { currentName, currentEmail });
-        console.log('New user data:', { newName, newEmail });
+        const { currentHero, currentOrigin, currentPowers } = req.params;
+        const { newHero, newOrigin, newPowers } = req.body;
+        console.log('Current user:', { currentHero, currentOrigin, currentPowers });
+        console.log('New user data:', { newHero,  newOrigin, newPowers });
         const data = await fs.readFile(dataPath, 'utf8');
         if (data) {
-            let users = JSON.parse(data);
-            const userIndex = users.findIndex(user => user.name === currentName && user.email === currentEmail);
+            let heroes = JSON.parse(data);
+            const userIndex = heroes.findIndex(h => h.hero === currentHero && h.origin === currentOrigin && h.superPowers.includes(currentPowers));
             console.log(userIndex);
             if (userIndex === -1) {
                 return res.status(404).json({ message: "User not found" })
             }
-            users[userIndex] = { ...users[userIndex], name: newName, email: newEmail };
-            console.log(users);
-            await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
-
-            res.status(200).json({ message: `You sent ${newName} and ${newEmail}` });
+            heroes[userIndex] = { ...heroes[userIndex], hero: newHero, origin: newOrigin, superPower: newPowers};
+            console.log(heroes);
+            await fs.writeFile(dataPath, JSON.stringify(heroes, null, 2));
+            res.status(200).json({ message: `You sent ${newHero} and ${newOrigin} and ${newPowers}` });
         }
     } catch (error) {
         console.error('Error updating user:', error);

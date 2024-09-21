@@ -3,44 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Form</title>
+    <title>Contact Form X</title>
+    <link rel="stylesheet" href="form.css">
+    <style>
+      body{
+        background-color: rgb(4, 255, 0);
+      }
+      #inputForm{
+        color:red;
+        background-color: grey;
+        text-align: center;
+        font-size: 1.2rem;
+        width:50%;
+        margin:auto;
+      }
+      
+      #usersTableH1{
+        text-align:center;
+        color:blue
+      }
+      #updateFormH1{
+        text-align:center;
+        color:blue
+      }
+      #inputFormH1{
+        text-align:center;
+        color:blue;
+      }
+
+      #usersTable{
+        width: 60%;
+        margin: auto;
+        text-align: center;
+      }
+      #usersTable th{
+        font-size: 2rem;
+      }
+
+
+      #updateForm{
+        font-size:1.2rem;
+        margin:auto;
+        text-align:center;
+      }
+    </style>
   </head>
   <body>
-    <h1>Contact Form</h1>
-    <form action="/submit-form" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required /><br /><br />
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required /><br /><br />
-      <label for="message">Message:</label><br />
+    <h1 id="inputFormH1">Contact Form</h1>
+    <form action="/submit-form" method="POST" id="inputForm">
+      <label for="hero">Hero:</label>
+      <input type="text" id="hero" name="hero" required /><br /><br />
+      <label for="origin">Origin:</label>
+      <input type="text" id="origin" name="origin" required /><br /><br />
+      <label for="superPowers">SuperPowers:</label><br />
       <textarea
-        id="message"
-        name="message"
+        id="superPowers"
+        name="superPowers"
         rows="4"
         cols="50"
         required
       ></textarea
       ><br /><br />
-      <input type="submit" value="Submit" />
+      <input type="submit" value="submit" />
     </form>
-    <h1>User Management</h1>
+    <h1 id="updateFormH1">User Management</h1>
     <form id="updateForm">
-      <label for="currentName">Current name:</label>
-      <input type="text" id="currentName" required /><br /><br />
-      <label for="currentEmail">Current email:</label>
-      <input type="email" id="currentEmail" required /><br /><br />
-      <label for="newName">New name:</label>
-      <input type="text" id="newName" required /><br /><br />
-      <label for="newEmail">New email:</label>
-      <input type="email" id="newEmail" required /><br /><br />
+      <label for="currentHero">Hero Status:</label>
+      <input type="text" id="currentHero" required /><br /><br />
+      <label for="currentOrigin">Origin Status:</label>
+      <input type="text" id="currentOrigin" required /><br /><br />
+      <label for="currentPowers">Powers Status:</label>
+      <input type="text" id="currentPowers" required /><br /><br />
+      <label for="newHero">New Hero:</label>
+      <input type="text" id="newHero" required /><br /><br />
+      <label for="newOrigin">New Origin:</label>
+      <input type="text" id="newOrigin" required /><br /><br />
+      <label for="newPowers">New Powers:</label>
+      <input type="text" id="newPowers" required /><br /><br />
       <button type="submit">Update User</button>
     </form>
-    <h1>Show Users</h1>
+    <h1 id="usersTableH1">Show Users</h1>
     <table id="usersTable">
       <thead>
         <tr>
-          <th>User Name</th>
-          <th>User Email</th>
+          <th>Hero</th>
+          <th>Origin</th>
+          <th>SuperPowers</th>
         </tr>
       </thead>
       <tbody id="userTableBody">
@@ -52,25 +100,32 @@
         .getElementById("updateForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
-          const currentName = document.getElementById("currentName").value;
-          const currentEmail = document.getElementById("currentEmail").value;
-          const newName = document.getElementById("newName").value;
-          const newEmail = document.getElementById("newEmail").value;
+          const currentHero = document.getElementById("currentHero").value;
+          const currentOrigin = document.getElementById("currentOrigin").value;
+          const currentPowers = document.getElementById("currentPowers").value;
+          const newHero = document.getElementById("newHero").value;
+          const newOrigin = document.getElementById("newOrigin").value;
+          const newPowers = document.getElementById("newPowers").value;
           try {
             const response = await fetch(
-              `/update-user/${currentName}/${currentEmail}`,
+              `/update-user/${currentHero}/${currentOrigin}/${currentPowers}`,
               {
                 method: "PUT",
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ newName, newEmail }),
+                body: JSON.stringify({ newHero, newOrigin, newPowers }),
               }
             );
             const data = await response.json();
             console.log(data);
             renderUsers();
             // alert("Message is: " + data.message);
+            if (response.ok) {
+            alert("User updated successfully: " + data.message);
+          } else {
+            alert("Failed to update user: " + data.message || "Unknown error");
+          }
           } catch (error) {
             alert("Error updating user: " + error.message);
           }
@@ -83,10 +138,10 @@
           }
           // there could be an error getting response/fetching the endpoint
           console.log(response);
-          const users = await response.json();
+          const heroes = await response.json();
           // there could be an error parsing the response
           // console.log(users);
-          return users;
+          return heroes;
         } catch (error) {
           console.error("There was a problem");
           console.error(error);
@@ -97,14 +152,17 @@
         const tableBody = document.getElementById("userTableBody");
         tableBody.innerHTML = "";
         try {
-          const users = await fetchUsers();
-          if (Array.isArray(users) && users.length > 0) {
-            users.forEach((user) => {
-              const row = `<tr><td>${user.name}</td><td>${user.email}</td></tr>`;
+          const heroes = await fetchUsers();
+          if (Array.isArray(heroes) && heroes.length > 0) {
+            heroes.forEach((h) => {
+              console.log(h);
+              const row = `<tr><td>${h.hero}</td><td>${h.origin}</td><td>${h.superPower}</td></tr>`;
               tableBody.innerHTML += row;
             });
           }
-        } catch (error) {}
+        } catch (error) {
+          console.log(error)
+        }
       }
       document.addEventListener("DOMContentLoaded", renderUsers);
     </script>
