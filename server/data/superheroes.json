@@ -1,3 +1,23 @@
 [
-    
+  {
+    "hero": "Mr Moralws",
+    "origin": "Az",
+    "superPowers": [
+      null
+    ]
+  },
+  {
+    "hero": "SuperMan",
+    "origin": "Krypton",
+    "superPowers": [
+      "Coding"
+    ]
+  },
+  {
+    "hero": "Santi",
+    "origin": "Krypton",
+    "superPowers": [
+      "Freaky"
+    ]
+  }
 ]

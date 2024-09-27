@@ -3,92 +3,173 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Form X</title>
-    <link rel="stylesheet" href="form.css">
+    <title>Super Hero Form</title>
     <style>
-      body{
-        background-color: rgb(4, 255, 0);
+      @import url("https://fonts.googleapis.com/css2?family=Bangers&family=Bungee&display=swap");
+      body {
+        background-color: rgb(31, 40, 40);
       }
-      #inputForm{
-        color:red;
-        background-color: grey;
+      h1 {
+        font-family: "Bangers", system-ui;
+        font-size: 3rem;
+        font-style: normal;
+        font-weight: 200;
         text-align: center;
-        font-size: 1.2rem;
-        width:50%;
-        margin:auto;
+        color: rgb(25, 114, 215);
       }
-      
-      #usersTableH1{
-        text-align:center;
-        color:blue
-      }
-      #updateFormH1{
-        text-align:center;
-        color:blue
-      }
-      #inputFormH1{
-        text-align:center;
-        color:blue;
+      #inputForm {
+        border: 5px rgb(25, 114, 215) solid;
+        border-radius: 20px;
+        color: rgb(25, 114, 215);
+        /* background-color: grey; */
+        background: linear-gradient(black, rgb(96, 96, 96));
+        text-align: center;
+        font-size: 1.1rem;
+        font-family: "Bungee", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        width: 40%;
+        padding: 2%;
+        line-height: 30px;
+        margin: auto;
       }
 
-      #usersTable{
-        width: 60%;
+      #usersTable {
+        /* Change this to block for table styling */
+        width: 50%;
+        margin: auto;
+        font-weight: 700;
+        /* text-align: center; */
+        /* border: 1px black solid; */
+        border-collapse: collapse;
+        border: 5px rgb(25, 114, 215) solid;
+        border-radius: 20px;
+        background: linear-gradient(black, rgb(96, 96, 96));
+      }
+
+      #usersTable thead {
+        color: rgb(25, 114, 215);
+        font-family: "Bungee", system-ui;
+        font-weight: 400;
+        font-size: 1.1rem;
+        font-style: normal;
+        display: table; /* Use flexbox on the thead */
+        width: 100%; /* Center the headers */
+      }
+
+      #usersTable th {
+        /* Add space between header cells */
+        text-align: center;
+        width: 33.33%; /* Optional: makes all headers take equal space */
+        padding: 20px; /* Add some padding for better appearance */
+        border: 3px solid rgb(25, 114, 215); /* Optional: to show borders */
+      }
+
+      #userTableBody {
+        color: red;
+        border: 5px rgb(25, 114, 215) solid;
+        border-radius: 20px;
+      }
+
+      #updateForm {
+        border: 5px rgb(25, 114, 215) solid;
+        border-radius: 20px;
+        color: rgb(25, 114, 215);
+        font-weight: 700;
+        font-size: 1.2rem;
+        font-family: "Bungee", system-ui;
+        font-weight: 400;
+        font-size: 1.1rem;
+        font-style: normal;
         margin: auto;
         text-align: center;
+        background: linear-gradient(black, rgb(96, 96, 96));
+        width: 50%;
+        line-height: 30px;
+        padding: 5px;
+        padding-bottom: 20px;
       }
-      #usersTable th{
-        font-size: 2rem;
+      #delete-user{
+        border: 5px rgb(25, 114, 215) solid;
+        border-radius: 20px;
+        color: rgb(25, 114, 215);
+        font-weight: 700;
+        font-size: 1.2rem;
+        font-family: "Bungee", system-ui;
+        font-weight: 400;
+        font-size: 1.1rem;
+        font-style: normal;
+        margin: auto;
+        text-align: center;
+        background: linear-gradient(black, rgb(96, 96, 96));
+        width: 50%;
+        line-height: 30px;
+        padding: 5px;
+        padding-bottom: 20px;
       }
 
-
-      #updateForm{
-        font-size:1.2rem;
-        margin:auto;
-        text-align:center;
+      .buttonUpdate {
+        color: rgb(61, 181, 255);
+        font-weight: 800;
+        background-color: rgb(0, 0, 0);
+        border-radius: 30px;
+        border: 2px rgb(61, 181, 255) solid;
+      }
+      .buttonSubmit {
+        text-decoration: none;
+        color: rgb(61, 181, 255);
+        font-weight: 800;
+        background-color: black;
+        border: 2px rgb(61, 181, 255) solid;
+        border-radius: 30px;
       }
     </style>
   </head>
   <body>
-    <h1 id="inputFormH1">Contact Form</h1>
+    <h1 id="inputFormH1">Hero Form</h1>
     <form action="/submit-form" method="POST" id="inputForm">
       <label for="hero">Hero:</label>
       <input type="text" id="hero" name="hero" required /><br /><br />
       <label for="origin">Origin:</label>
       <input type="text" id="origin" name="origin" required /><br /><br />
-      <label for="superPowers">SuperPowers:</label><br />
-      <textarea
-        id="superPowers"
-        name="superPowers"
-        rows="4"
-        cols="50"
-        required
-      ></textarea
-      ><br /><br />
-      <input type="submit" value="submit" />
+      <label for="superPower">Super Powers:</label>
+      <input type="text" id="superPower" name="superPower" required /><br />
+      <br />
+      <input type="submit" value="Submit" class="buttonSubmit" />
     </form>
-    <h1 id="updateFormH1">User Management</h1>
+    <h1 id="updateFormH1">Hero Management</h1>
     <form id="updateForm">
       <label for="currentHero">Hero Status:</label>
       <input type="text" id="currentHero" required /><br /><br />
       <label for="currentOrigin">Origin Status:</label>
       <input type="text" id="currentOrigin" required /><br /><br />
-      <label for="currentPowers">Powers Status:</label>
-      <input type="text" id="currentPowers" required /><br /><br />
+      <!-- <label for="currentPowers">Powers Status:</label>
+      <input type="text" id="currentPowers" /><br /><br /> -->
       <label for="newHero">New Hero:</label>
       <input type="text" id="newHero" required /><br /><br />
       <label for="newOrigin">New Origin:</label>
       <input type="text" id="newOrigin" required /><br /><br />
-      <label for="newPowers">New Powers:</label>
-      <input type="text" id="newPowers" required /><br /><br />
-      <button type="submit">Update User</button>
+      <!-- <label for="newPowers">New Powers:</label>
+      <input type="text" id="newPowers"/><br /><br /> -->
+      <button type="submit" class="buttonUpdate">Update User</button><br />
     </form>
-    <h1 id="usersTableH1">Show Users</h1>
+    <h1>Delete User</h1>
+    <form action="" id="delete-user">
+      <label for="delete-hero">Hero</label>
+      <input type="text" id="delete-hero"> <br><br>
+      <label for="delete-origin">Origin</label>
+      <input type="text" id="delete-origin"><br><br>
+      <!-- <label for="delete-superPowers">Super Powers</label>
+      <input type="text" id="delete-superPowers"><br><br> -->
+      <button type="submit">DELETE</button>
+    </form>  
+    <h1 id="usersTableH1">Heroes</h1>
     <table id="usersTable">
       <thead>
         <tr>
           <th>Hero</th>
           <th>Origin</th>
-          <th>SuperPowers</th>
+          <th>Super Powers</th>
         </tr>
       </thead>
       <tbody id="userTableBody">
@@ -102,13 +183,11 @@
           e.preventDefault();
           const currentHero = document.getElementById("currentHero").value;
           const currentOrigin = document.getElementById("currentOrigin").value;
-          const currentPowers = document.getElementById("currentPowers").value;
           const newHero = document.getElementById("newHero").value;
           const newOrigin = document.getElementById("newOrigin").value;
-          const newPowers = document.getElementById("newPowers").value;
           try {
             const response = await fetch(
-              `/update-user/${currentHero}/${currentOrigin}/${currentPowers}`,
+              `/update-user/${currentHero}/${currentOrigin}`,
               {
                 method: "PUT",
                 headers: {
@@ -121,11 +200,6 @@
             console.log(data);
             renderUsers();
             // alert("Message is: " + data.message);
-            if (response.ok) {
-            alert("User updated successfully: " + data.message);
-          } else {
-            alert("Failed to update user: " + data.message || "Unknown error");
-          }
           } catch (error) {
             alert("Error updating user: " + error.message);
           }
@@ -147,7 +221,25 @@
           console.error(error);
         }
       }
-
+      document.getElementById('delete-user')
+        .addEventListener('submit', async (e)=>{
+          e.preventDefault();
+          const hero = document.getElementById('delete-hero').value;
+          const origin = document.getElementById('delete-origin').value;
+        
+          try {
+            const response = await fetch(`/user/${hero}/${origin}`, {
+              method: "DELETE",
+            });
+            if (!response.ok){
+              throw new Error('not scientifically possible');
+            }
+            const data = await response.text();
+            console.log(data)
+          } catch(error){
+            console.error('there was a problem, L + Ratio')
+          }
+        })
       async function renderUsers() {
         const tableBody = document.getElementById("userTableBody");
         tableBody.innerHTML = "";
@@ -156,12 +248,12 @@
           if (Array.isArray(heroes) && heroes.length > 0) {
             heroes.forEach((h) => {
               console.log(h);
-              const row = `<tr><td>${h.hero}</td><td>${h.origin}</td><td>${h.superPower}</td></tr>`;
+              const row = `<tr><td>${h.hero}</td><td>${h.origin}</td><td>${h.superPowers}</td></tr>`;
               tableBody.innerHTML += row;
             });
           }
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       }
       document.addEventListener("DOMContentLoaded", renderUsers);
