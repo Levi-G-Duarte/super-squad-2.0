@@ -92,14 +92,17 @@ app.put('/update-user/:currentHero/:currentOrigin', async (req, res) => {
             const userIndex = heroes.findIndex(h => h.hero === currentHero && h.origin === currentOrigin);
             console.log(userIndex);
             if (userIndex === -1) {
-                return res.status(404).json({ message: "User not found" })
+                alert("Hero Does Not Exist");
+                return res.status(404).json({ message: "User not found" });
+                
             }
             heroes[userIndex] = { ...heroes[userIndex], hero: newHero, origin: newOrigin };
             console.log(heroes);
             await fs.writeFile(dataPath, JSON.stringify(heroes, null, 2));
-            res.status(200).json({ message: `You sent ${newHero} and ${newOrigin} and ${newPowers}` });
+            res.status(200).json({ message: `You sent ${newHero} and ${newOrigin}` });
         }
     } catch (error) {
+        alert('Hero Does Not Exist Bruv')
         console.error('Error updating user:', error);
         res.status(500).send('An error occurred while updating the user.');
     }
@@ -148,6 +151,7 @@ app.delete('/user/:hero/:origin', async (req, res) => {
         res.send('sucessfully deleted user')
         // send a success deleted message
     } catch (error) {
+        alert('Hero Does Not Exist Bruv')
         console.error('this is not a banger')
     }
 })

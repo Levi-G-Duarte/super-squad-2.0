@@ -1,23 +1,37 @@
 [
   {
-    "hero": "Mr Moralws",
-    "origin": "Az",
+    "hero": "Issax",
+    "origin": "AZ",
     "superPowers": [
-      null
+      "Super Nerd"
     ]
   },
   {
-    "hero": "SuperMan",
-    "origin": "Krypton",
+    "hero": "Leo-Juan",
+    "origin": "AZ",
     "superPowers": [
-      "Coding"
+      "Edging"
     ]
   },
   {
     "hero": "Santi",
-    "origin": "Krypton",
+    "origin": "Venezuela",
     "superPowers": [
       "Freaky"
+    ]
+  },
+  {
+    "hero": "Daniel",
+    "origin": "Ensanada",
+    "superPowers": [
+      "Short"
+    ]
+  },
+  {
+    "hero": "Gabe",
+    "origin": "Island",
+    "superPowers": [
+      "Procrastination"
     ]
   }
 ]

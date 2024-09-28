@@ -6,6 +6,7 @@
     <title>Super Hero Form</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Bangers&family=Bungee&display=swap");
+      @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
       body {
         background-color: rgb(31, 40, 40);
       }
@@ -28,7 +29,7 @@
         font-family: "Bungee", system-ui;
         font-weight: 400;
         font-style: normal;
-        width: 40%;
+        width: 50%;
         padding: 2%;
         line-height: 30px;
         margin: auto;
@@ -36,13 +37,16 @@
 
       #usersTable {
         /* Change this to block for table styling */
-        width: 50%;
+        width: 60%;
         margin: auto;
         font-weight: 700;
+        padding: 2%;
         /* text-align: center; */
         /* border: 1px black solid; */
-        border-collapse: collapse;
-        border: 5px rgb(25, 114, 215) solid;
+        /* border-collapse: collapse; */
+        border: 5px rgb(25, 114, 215) solid; 
+        padding:5px;
+        text-align:center;
         border-radius: 20px;
         background: linear-gradient(black, rgb(96, 96, 96));
       }
@@ -51,22 +55,25 @@
         color: rgb(25, 114, 215);
         font-family: "Bungee", system-ui;
         font-weight: 400;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-style: normal;
-        display: table; /* Use flexbox on the thead */
-        width: 100%; /* Center the headers */
+        /* width:20%; */
       }
 
       #usersTable th {
-        /* Add space between header cells */
-        text-align: center;
-        width: 33.33%; /* Optional: makes all headers take equal space */
-        padding: 20px; /* Add some padding for better appearance */
-        border: 3px solid rgb(25, 114, 215); /* Optional: to show borders */
+        width:20%;
+        border: 3px solid rgb(25, 114, 215); 
+        border-radius: 20px
       }
 
       #userTableBody {
-        color: red;
+        color: rgb(21, 181, 255);
+        font-family: "Exo 2", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 800;
+        line-height:35px;
+        padding:3px;
+        font-style: normal;
         border: 5px rgb(25, 114, 215) solid;
         border-radius: 20px;
       }
@@ -86,7 +93,7 @@
         background: linear-gradient(black, rgb(96, 96, 96));
         width: 50%;
         line-height: 30px;
-        padding: 5px;
+        padding: 2%;
         padding-bottom: 20px;
       }
       #delete-user{
@@ -104,18 +111,19 @@
         background: linear-gradient(black, rgb(96, 96, 96));
         width: 50%;
         line-height: 30px;
-        padding: 5px;
+        padding: 2%;
         padding-bottom: 20px;
       }
 
-      .buttonUpdate {
+      .buttonDelete, .buttonUpdate , .buttonSubmit{
+        text-decoration: none;
         color: rgb(61, 181, 255);
         font-weight: 800;
         background-color: rgb(0, 0, 0);
         border-radius: 30px;
         border: 2px rgb(61, 181, 255) solid;
       }
-      .buttonSubmit {
+      /* .buttonSubmit {
         text-decoration: none;
         color: rgb(61, 181, 255);
         font-weight: 800;
@@ -123,6 +131,14 @@
         border: 2px rgb(61, 181, 255) solid;
         border-radius: 30px;
       }
+      .buttonDelete{
+        text-decoration: none;
+        color: rgb(61, 181, 255);
+        font-weight: 800;
+        background-color: black;
+        border: 2px rgb(61, 181, 255) solid;
+        border-radius: 30px;
+      } */
     </style>
   </head>
   <body>
@@ -153,17 +169,17 @@
       <input type="text" id="newPowers"/><br /><br /> -->
       <button type="submit" class="buttonUpdate">Update User</button><br />
     </form>
-    <h1>Delete User</h1>
+    <h1>Remove Hero</h1>
     <form action="" id="delete-user">
-      <label for="delete-hero">Hero</label>
+      <label for="delete-hero">Hero:</label>
       <input type="text" id="delete-hero"> <br><br>
-      <label for="delete-origin">Origin</label>
+      <label for="delete-origin">Origin:</label>
       <input type="text" id="delete-origin"><br><br>
       <!-- <label for="delete-superPowers">Super Powers</label>
       <input type="text" id="delete-superPowers"><br><br> -->
-      <button type="submit">DELETE</button>
+      <button type="submit" class="buttonDelete">Delete</button>
     </form>  
-    <h1 id="usersTableH1">Heroes</h1>
+    <h1 id="usersTableH1">Hero List</h1>
     <table id="usersTable">
       <thead>
         <tr>
@@ -193,7 +209,7 @@
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ newHero, newOrigin, newPowers }),
+                body: JSON.stringify({ newHero, newOrigin }),
               }
             );
             const data = await response.json();
@@ -236,7 +252,9 @@
             }
             const data = await response.text();
             console.log(data)
+            renderUsers();
           } catch(error){
+            alert('Hero Does Not Exist, Please input a Current Hero')
             console.error('there was a problem, L + Ratio')
           }
         })
